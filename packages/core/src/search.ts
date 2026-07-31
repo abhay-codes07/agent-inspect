@@ -179,10 +179,15 @@ export async function searchTraces(
     }
   }
 
+  // Newest first, matching `list` and the no-content-filter branch above
+  // (both order via filterTraces). Sorting oldest first here made a filtered
+  // search disagree with a bare search and made `--limit` keep the oldest
+  // matches instead of the most recent. Ties fall back to stable ascending
+  // keys so results stay deterministic.
   results.sort((a, b) => {
     const ta = a.timestamp ?? 0;
     const tb = b.timestamp ?? 0;
-    if (ta !== tb) return ta - tb;
+    if (ta !== tb) return tb - ta;
     const runCmp = a.runId.localeCompare(b.runId);
     if (runCmp !== 0) return runCmp;
     return (a.stepName ?? "").localeCompare(b.stepName ?? "");
