@@ -173,6 +173,22 @@ export function truncateName(name: string, maxLength = MAX_NAME_LENGTH): string 
 }
 
 /**
+ * Formats a `type:name` step label without doubling the prefix.
+ *
+ * `step.tool`/`step.llm` store the name already prefixed with its type
+ * (e.g. `"tool:lookup"`, `"llm:gpt-4"`), while a plain `step()` stores a bare
+ * name (e.g. `"plan"`). Renderers that show the type tag must therefore add the
+ * prefix only when it is not already present, otherwise tool/llm steps read as
+ * `"tool:tool:lookup"`. This keeps timeline, search, and stats output aligned
+ * with how view/list show the same step.
+ */
+export function formatStepTypeLabel(stepType: string, stepName: string): string {
+  return stepName.startsWith(`${stepType}:`)
+    ? stepName
+    : `${stepType}:${stepName}`;
+}
+
+/**
  * Instrumentation-only warning to stderr. Not a general-purpose logger.
  * Optional `error` is summarized via {@link formatError} (message only).
  */

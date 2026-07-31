@@ -71,6 +71,7 @@ export {
   createStepId,
   formatDuration,
   formatTimestamp,
+  formatStepTypeLabel,
   getDefaultTraceDir,
   getTraceFilePath,
   ensureTraceDir,

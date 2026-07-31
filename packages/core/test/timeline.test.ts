@@ -66,3 +66,22 @@ describe("buildRunTimeline", () => {
     expect(timeline.entries).toEqual([]);
   });
 });
+
+describe("renderTimeline step labels", () => {
+  it("does not double the type prefix for tool/llm steps", async () => {
+    const events = await loadFixture("tool-with-io.jsonl");
+    const text = renderTimeline(buildRunTimeline(events));
+    // step.tool stores the name already prefixed ("tool:search-hotels"), so the
+    // renderer must not prepend the type again.
+    expect(text).toContain("tool:search-hotels");
+    expect(text).not.toContain("tool:tool:");
+    expect(text).not.toContain("llm:llm:");
+  });
+
+  it("keeps the type tag for a plain (bare-named) step", async () => {
+    const events = await loadFixture("minimal-success.jsonl");
+    const text = renderTimeline(buildRunTimeline(events));
+    // Plain step() stores a bare name; the timeline still shows its type tag.
+    expect(text).toContain("logic:plan");
+  });
+});

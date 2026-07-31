@@ -17,6 +17,7 @@ import {
   FALLBACK_TRACE_DIR,
   formatDuration,
   formatError,
+  formatStepTypeLabel,
   formatTimestamp,
   getDefaultTraceDir,
   getTraceFilePath,
@@ -244,5 +245,21 @@ describe("warn", () => {
     warn("oops", new Error("bad"));
     expect(spy).toHaveBeenCalledWith("[AgentInspect] oops: bad");
     spy.mockRestore();
+  });
+});
+
+describe("formatStepTypeLabel", () => {
+  it("prefixes a bare step name with its type", () => {
+    expect(formatStepTypeLabel("logic", "plan")).toBe("logic:plan");
+  });
+
+  it("does not double a name that already carries the type prefix", () => {
+    expect(formatStepTypeLabel("tool", "tool:lookup")).toBe("tool:lookup");
+    expect(formatStepTypeLabel("llm", "llm:gpt-4")).toBe("llm:gpt-4");
+  });
+
+  it("only treats an exact type prefix as present", () => {
+    // "toolbox" is not the "tool:" prefix, so it is still prefixed.
+    expect(formatStepTypeLabel("tool", "toolbox")).toBe("tool:toolbox");
   });
 });

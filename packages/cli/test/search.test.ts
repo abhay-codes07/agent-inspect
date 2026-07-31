@@ -44,6 +44,20 @@ describe("search CLI", () => {
     expect(out).toContain("tool");
   });
 
+  it("does not double the type prefix in the human step label", async () => {
+    const fixtures = path.resolve(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "../../../fixtures/traces",
+    );
+    await cp(path.join(fixtures, "tool-with-io.jsonl"), path.join(tmpDir, "tool-with-io.jsonl"));
+    // The tool step is stored already prefixed ("tool:search-hotels"); the human
+    // renderer must not prepend the type again.
+    await searchCommand({ dir: tmpDir, kind: "tool" });
+    const out = logSpy.mock.calls.flat().join("\n");
+    expect(out).toContain("tool:search-hotels");
+    expect(out).not.toContain("tool:tool:");
+  });
+
   it("emits valid JSON", async () => {
     const fixtures = path.resolve(
       path.dirname(fileURLToPath(import.meta.url)),

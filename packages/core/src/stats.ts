@@ -2,7 +2,7 @@ import type { RunStartedEvent, TraceEvent, TraceMetadata } from "./types.js";
 import { buildRunSummary } from "./trace-metadata.js";
 import { filterTraces } from "./trace-filter.js";
 import { readTraceEventsFromFile } from "./storage.js";
-import { formatDuration } from "./utils.js";
+import { formatDuration, formatStepTypeLabel } from "./utils.js";
 
 export interface DurationStats {
   minMs?: number;
@@ -242,17 +242,6 @@ function collectCompletedSteps(
   return out;
 }
 
-/**
- * Formats a step label for display. `step.tool`/`step.llm` already store the
- * name with its type prefix (e.g. "tool:lookup"), while plain `step()` stores a
- * bare name, so prefixing unconditionally would double the prefix. Add the type
- * prefix only when the name does not already carry it, matching what list/view
- * show for the same step.
- */
-function formatStepLabel(stepType: string, stepName: string): string {
-  return stepName.startsWith(`${stepType}:`) ? stepName : `${stepType}:${stepName}`;
-}
-
 export function renderTraceStats(stats: TraceStats): string {
   const lines: string[] = [];
   lines.push("Trace stats (local)");
@@ -290,7 +279,7 @@ export function renderTraceStats(stats: TraceStats): string {
     lines.push("Slowest steps:");
     for (const s of stats.slowestSteps) {
       lines.push(
-        `  ${s.runId} | ${formatStepLabel(s.stepType, s.stepName)} | ${formatDuration(s.durationMs)}`,
+        `  ${s.runId} | ${formatStepTypeLabel(s.stepType, s.stepName)} | ${formatDuration(s.durationMs)}`,
       );
     }
   }
