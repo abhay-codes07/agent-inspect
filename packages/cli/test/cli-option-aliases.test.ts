@@ -1,6 +1,7 @@
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { afterEach, describe, expect, it } from "vitest";
 
@@ -10,6 +11,14 @@ import {
 } from "../src/cli-option-aliases.js";
 import { exportCommand } from "../src/export.js";
 import { redactCommand } from "../src/redact.js";
+
+// Resolve fixtures relative to this module, not process.cwd(). The rest of the
+// CLI suite does the same so `pnpm --filter @agent-inspect/cli test` (which runs
+// with cwd set to packages/cli) finds the repo-root fixtures directory.
+const fixturesTracesDir = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../../../fixtures/traces",
+);
 
 describe("CLI option aliases", () => {
   let tmp: string;
@@ -32,7 +41,7 @@ describe("CLI option aliases", () => {
     tmp = await mkdtemp(path.join(os.tmpdir(), "agent-inspect-cli-alias-export-"));
     const outPath = path.join(tmp, "export.md");
     await exportCommand("minimal-success", {
-      dir: path.resolve("fixtures/traces"),
+      dir: fixturesTracesDir,
       format: "markdown",
       out: outPath,
       profile: "share",
@@ -45,7 +54,7 @@ describe("CLI option aliases", () => {
   it("redact accepts --out and --redaction-profile aliases", async () => {
     tmp = await mkdtemp(path.join(os.tmpdir(), "agent-inspect-cli-alias-redact-"));
     const outPath = path.join(tmp, "redacted.jsonl");
-    await redactCommand(path.resolve("fixtures/traces/minimal-success.jsonl"), {
+    await redactCommand(path.join(fixturesTracesDir, "minimal-success.jsonl"), {
       out: outPath,
       redactionProfile: "share",
       json: true,
