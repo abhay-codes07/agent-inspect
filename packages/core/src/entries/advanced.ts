@@ -185,7 +185,7 @@ export type {
   TraceStats,
   TraceStatsOptions,
 } from "../stats.js";
-export { buildTraceStats, renderTraceStats } from "../stats.js";
+export { buildTraceStats, formatStepLabel, renderTraceStats } from "../stats.js";
 
 export type {
   TraceSearchOptions,

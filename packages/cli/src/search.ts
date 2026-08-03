@@ -1,6 +1,7 @@
 import {
   TraceDirectory,
   filterMetasBySessionScope,
+  formatStepLabel,
   loadSessionRunRecords,
   loadTraceMetadataList,
   parseDuration,
@@ -113,7 +114,7 @@ export async function searchCommand(
     for (const r of results) {
       const step =
         r.stepName !== undefined
-          ? ` | ${r.stepType ?? "step"}:${r.stepName}`
+          ? ` | ${formatStepLabel(r.stepType ?? "step", r.stepName)}`
           : "";
       const dur =
         r.durationMs !== undefined ? ` | ${r.durationMs}ms` : "";

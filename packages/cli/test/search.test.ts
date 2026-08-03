@@ -44,6 +44,20 @@ describe("search CLI", () => {
     expect(out).toContain("tool");
   });
 
+  it("does not double-prefix typed step labels in human output", async () => {
+    const fixtures = path.resolve(
+      path.dirname(fileURLToPath(import.meta.url)),
+      "../../../fixtures/traces",
+    );
+    await cp(path.join(fixtures, "tool-with-io.jsonl"), path.join(tmpDir, "tool-with-io.jsonl"));
+    await searchCommand({ dir: tmpDir, tool: "search" });
+    const out = logSpy.mock.calls.flat().join("\n");
+    // The stored name already carries its type ("tool:search-hotels"), so the
+    // label must not be prefixed again into "tool:tool:search-hotels".
+    expect(out).toContain("tool:search-hotels");
+    expect(out).not.toContain("tool:tool:");
+  });
+
   it("emits valid JSON", async () => {
     const fixtures = path.resolve(
       path.dirname(fileURLToPath(import.meta.url)),
