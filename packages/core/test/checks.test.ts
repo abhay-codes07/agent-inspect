@@ -371,6 +371,24 @@ describe("built-in run, tool, and LLM checks", () => {
     });
   });
 
+  it("treats an empty tool allowlist as no restriction", () => {
+    const tool = persisted("event-a", {
+      kind: "TOOL",
+      name: "tool:search",
+      attributes: { toolName: "search" },
+    });
+    const read = readResult([tool]);
+
+    // allowed: [] must not reject every tool; the required tool is present.
+    const result = runTraceChecks(
+      { read },
+      { rules: [createToolUsageRule({ required: ["search"], allowed: [] })] },
+    );
+
+    expect(result.status).toBe("pass");
+    expect(result.findings).toHaveLength(0);
+  });
+
   it("reports LLM model, provider, finish reason, call count, and token-budget violations", () => {
     const first = persisted("event-a", {
       kind: "LLM",

@@ -1640,7 +1640,8 @@ export function createToolUsageRule(options: ToolUsageRuleOptions): TraceCheckRu
       }
 
       const forbidden = new Set(options.forbidden ?? []);
-      const allowed = options.allowed ? new Set(options.allowed) : undefined;
+      // Empty allowlist means "no restriction", not "reject everything".
+      const allowed = options.allowed?.length ? new Set(options.allowed) : undefined;
       for (const event of tools) {
         const name = toolName(event);
         if (forbidden.has(name)) {
@@ -2199,7 +2200,8 @@ function createSignalRule(
       }
 
       const forbidden = new Set(options.forbidden ?? []);
-      const allowed = options.allowed ? new Set(options.allowed) : undefined;
+      // Empty allowlist means "no restriction", not "reject everything".
+      const allowed = options.allowed?.length ? new Set(options.allowed) : undefined;
       for (const event of events) {
         const name = nameForEvent(event);
         if (forbidden.has(name)) {
