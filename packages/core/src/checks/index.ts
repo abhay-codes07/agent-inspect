@@ -1768,9 +1768,12 @@ export function createLlmUsageRule(options: LlmUsageRuleOptions): TraceCheckRule
     evaluate(context) {
       const llms = finishedEvents(context, "LLM");
       const findings: TraceCheckFinding[] = [];
-      const allowedModels = options.allowedModels ? new Set(options.allowedModels) : undefined;
-      const allowedProviders = options.allowedProviders ? new Set(options.allowedProviders) : undefined;
-      const finishReasons = options.finishReasons ? new Set(options.finishReasons) : undefined;
+      // An empty allowlist means "no restriction", not "reject everything".
+      // Callers (CLI --max-total-tokens with no --allowed-model, config, or
+      // contract) may pass [], and an empty array is truthy, so guard on length.
+      const allowedModels = options.allowedModels?.length ? new Set(options.allowedModels) : undefined;
+      const allowedProviders = options.allowedProviders?.length ? new Set(options.allowedProviders) : undefined;
+      const finishReasons = options.finishReasons?.length ? new Set(options.finishReasons) : undefined;
 
       if (options.maxCalls !== undefined && llms.length > options.maxCalls) {
         findings.push(
