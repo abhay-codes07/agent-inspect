@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -14,9 +15,12 @@ import {
 } from "../src/checks/index.js";
 import { openTrace } from "../src/readers/index.js";
 
+// Resolve the fixture relative to this module, not process.cwd(). Running the
+// package suite (`pnpm --filter @agent-inspect/core test`) sets cwd to
+// packages/core, where a cwd-relative path misses the repo-root fixtures.
 const fixturePath = path.resolve(
-  process.cwd(),
-  "fixtures/langgraph/pilot-shaped-bridged-tool.jsonl",
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../../../fixtures/langgraph/pilot-shaped-bridged-tool.jsonl",
 );
 
 describe("semantic parity (6.12.3)", () => {
