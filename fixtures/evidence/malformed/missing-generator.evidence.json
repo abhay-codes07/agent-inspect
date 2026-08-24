@@ -1,0 +1,34 @@
+{
+  "evidenceFormatVersion": "1.0",
+  "createdAt": "2026-06-26T00:00:00.000Z",
+  "source": {
+    "runIds": [
+      "run-a"
+    ],
+    "traceSchemaVersions": [
+      "0.2"
+    ],
+    "sourceHashes": [
+      {
+        "runId": "run-a",
+        "algorithm": "sha256",
+        "hash": "ea4f8e5663bf24ef621b5f3bfe0f251e1f9d63d25cfdab35a3ff33ac277d8cc6"
+      }
+    ]
+  },
+  "policy": {
+    "redactionProfile": "share",
+    "verificationPolicy": "share"
+  },
+  "assessment": {
+    "status": "SAFE",
+    "note": "Best-effort local safety verification only; not a compliance certification."
+  },
+  "files": [
+    {
+      "path": "trace.jsonl",
+      "sha256": "ea4f8e5663bf24ef621b5f3bfe0f251e1f9d63d25cfdab35a3ff33ac277d8cc6",
+      "role": "redacted-trace"
+    }
+  ]
+}
