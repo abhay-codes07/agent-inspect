@@ -102,7 +102,14 @@ function countErrorNodes(nodes: FlatNode[]): number {
 
 function slowestNode(nodes: FlatNode[]): FlatNode | undefined {
   return nodes
-    .filter((entry) => entry.node.event.durationMs !== undefined)
+    .filter(
+      (entry) =>
+        entry.node.event.durationMs !== undefined &&
+        // The RUN boundary spans the whole run, so its duration always dominates
+        // and shadows every real step. Rank actual work nodes only, matching the
+        // stats slowest-step ranking, which never counts the run envelope.
+        entry.node.event.kind !== "RUN",
+    )
     .sort((a, b) => {
       const delta = (b.node.event.durationMs ?? 0) - (a.node.event.durationMs ?? 0);
       return delta !== 0 ? delta : a.index - b.index;
