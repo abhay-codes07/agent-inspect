@@ -4,6 +4,8 @@
 
 **Authority:** [implementation/ROADMAP.md](./implementation/ROADMAP.md) · [history/RELEASE-HISTORY.md](./history/RELEASE-HISTORY.md)
 
+**Operating guidance:** [EVIDENCE-RETENTION.md](./EVIDENCE-RETENTION.md) covers retention, size, and PR-attachment.
+
 AgentInspect **evidence** is a local, share-checked, integrity-verifiable artifact for reviewing one or more agent runs offline — the “Playwright report for an agent run,” not a compliance certification.
 
 ## Relationship to existing bundles
