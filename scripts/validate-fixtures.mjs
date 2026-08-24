@@ -105,6 +105,7 @@ const REQUIRED = {
     "fixtures/standards/openinference-basic.json",
     "fixtures/standards/otlp-basic.json",
     "fixtures/standards/openinference-export-golden.json",
+    "fixtures/standards/otlp-preservation-corpus.json",
   ],
 };
 
