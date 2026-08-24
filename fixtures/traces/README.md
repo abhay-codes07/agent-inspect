@@ -25,6 +25,8 @@ Small **manual trace** files consumed by list/view/export/diff and compatibility
 | `repeated-tool-args.jsonl` | Same tool called 5x with identical `arguments` metadata (circuit signal); run ends in loop-guard error |
 | `tool-timeout-stall.jsonl` | Tool exceeds its `timeoutMs` metadata, then a long stall before the run aborts |
 | `dual-format-parity.jsonl` | v0.1 half of list/stats/search parity coverage; embedded run id differs from filename |
+| `contract-broken.jsonl` | Refund agent that errors without calling the required tool; fails a TraceContract on `run.status` and `tool.usage` |
+| `contract-fixed.jsonl` | Same refund agent that calls `refund_order` and completes; passes the same TraceContract |
 
 ## Feature mapping
 

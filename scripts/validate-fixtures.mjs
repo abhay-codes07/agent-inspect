@@ -35,6 +35,8 @@ const REQUIRED = {
     "fixtures/traces/tool-timeout-stall.jsonl",
     "fixtures/traces/dual-format-parity.jsonl",
     "fixtures/traces/outcome-pass.jsonl",
+    "fixtures/traces/contract-broken.jsonl",
+    "fixtures/traces/contract-fixed.jsonl",
   ],
   langgraph: [
     "fixtures/langgraph/plain-root.jsonl",

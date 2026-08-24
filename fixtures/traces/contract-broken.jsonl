@@ -1,0 +1,4 @@
+{"schemaVersion":"0.1","event":"run_started","timestamp":1700000002000,"runId":"contract-broken","name":"refund-agent","startTime":1700000002000}
+{"schemaVersion":"0.1","event":"step_started","timestamp":1700000002010,"runId":"contract-broken","stepId":"llm_001","name":"llm:plan-refund","type":"llm","startTime":1700000002010,"metadata":{"model":"fixture-model"}}
+{"schemaVersion":"0.1","event":"step_completed","timestamp":1700000002110,"runId":"contract-broken","stepId":"llm_001","status":"success","endTime":1700000002110,"durationMs":100}
+{"schemaVersion":"0.1","event":"run_completed","timestamp":1700000002120,"runId":"contract-broken","status":"error","endTime":1700000002120,"durationMs":120}

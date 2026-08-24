@@ -1,0 +1,6 @@
+{"schemaVersion":"0.1","event":"run_started","timestamp":1700000003000,"runId":"contract-fixed","name":"refund-agent","startTime":1700000003000}
+{"schemaVersion":"0.1","event":"step_started","timestamp":1700000003010,"runId":"contract-fixed","stepId":"llm_001","name":"llm:plan-refund","type":"llm","startTime":1700000003010,"metadata":{"model":"fixture-model"}}
+{"schemaVersion":"0.1","event":"step_completed","timestamp":1700000003110,"runId":"contract-fixed","stepId":"llm_001","status":"success","endTime":1700000003110,"durationMs":100}
+{"schemaVersion":"0.1","event":"step_started","timestamp":1700000003120,"runId":"contract-fixed","stepId":"tool_001","name":"tool:refund-order","type":"tool","startTime":1700000003120,"metadata":{"toolName":"refund_order","inputPreview":"{\"orderId\":\"A-1\"}","outputPreview":"{\"refunded\":true}"}}
+{"schemaVersion":"0.1","event":"step_completed","timestamp":1700000003320,"runId":"contract-fixed","stepId":"tool_001","status":"success","endTime":1700000003320,"durationMs":200}
+{"schemaVersion":"0.1","event":"run_completed","timestamp":1700000003330,"runId":"contract-fixed","status":"success","endTime":1700000003330,"durationMs":330}
