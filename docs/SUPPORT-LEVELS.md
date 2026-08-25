@@ -37,6 +37,8 @@ Canonical maturity labels for AgentInspect public packages and major surfaces (6
 
 Part of the fixed AgentInspect release line — see the npm badge for the current version.
 
+> Every level in this matrix must be one of the Definitions levels above, and `docs/product/PUBLIC-PRODUCT-FACTS.json` `matchers.status` must match the matchers row here. `pnpm public-truth:check` enforces both; update the doc and the facts file together.
+
 ## Public package groups (presentation only)
 
 Physical packages stay the fixed group of 18. Outreach/install kits group them as:
