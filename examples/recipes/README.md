@@ -46,6 +46,7 @@ pointed at something real, per NETWORK-BEHAVIOR.md.
 
 | Recipe | Developer job | Stack / integration | API key? | Network behavior | Support level | Main command |
 |---|---|---|---|---|---|---|
+| [adpa-codebase-change-trace](adpa-codebase-change-trace) | Governance-referenced change trace (intent -> contract -> validation) | `agent-inspect` | No | No network | Supported <sup>Workspace / bundles / observed outcomes / Evidence v2</sup> | `pnpm --filter agent-inspect-recipe-adpa-codebase-change-trace start` |
 | [ai-sdk-local-telemetry](ai-sdk-local-telemetry) | AI SDK tracing | `@agent-inspect/ai-sdk`<br>`agent-inspect` | No | No network | Supported | `pnpm --filter agent-inspect-recipe-ai-sdk-local-telemetry start` |
 | [ai-sdk-next-route](ai-sdk-next-route) | AI SDK tracing (per request) | `@agent-inspect/ai-sdk`<br>`agent-inspect` | No | No network | Supported | `pnpm --filter agent-inspect-recipe-ai-sdk-next-route start` |
 | [bounded-read-recovery](bounded-read-recovery) | Gate safe read-tool recovery (`retry.operations`) | `agent-inspect` | No | Synthetic fixtures only | Beta <sup>TraceContract API</sup> | `pnpm --filter agent-inspect-recipe-bounded-read-recovery start` |
