@@ -1,0 +1,37 @@
+{
+  "receipts": [
+    {
+      "receiptId": "rcpt-A",
+      "idempotencyKey": "idem-A",
+      "operationId": "op-A",
+      "status": "acknowledged",
+      "receivedAt": "2026-09-12T10:00:05.000Z",
+      "provenance": "sandbox-webhook",
+      "digest": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "receiptId": "rcpt-C",
+      "idempotencyKey": "idem-C",
+      "operationId": "op-X",
+      "status": "acknowledged",
+      "receivedAt": "2026-09-12T10:00:07.000Z",
+      "provenance": "sandbox-webhook"
+    },
+    {
+      "receiptId": "rcpt-D1",
+      "idempotencyKey": "idem-D",
+      "operationId": "op-D",
+      "status": "acknowledged",
+      "receivedAt": "2026-09-12T10:00:08.000Z",
+      "provenance": "sandbox-webhook"
+    },
+    {
+      "receiptId": "rcpt-D2",
+      "idempotencyKey": "idem-D",
+      "operationId": "op-D",
+      "status": "acknowledged",
+      "receivedAt": "2026-09-12T10:00:09.000Z",
+      "provenance": "sandbox-replay"
+    }
+  ]
+}

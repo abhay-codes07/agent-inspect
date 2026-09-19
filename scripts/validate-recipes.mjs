@@ -65,6 +65,7 @@ const RECIPES = [
   "architectural-intent-trace",
   "comparable-cohort-runs",
   "mcp-transport-retry-429",
+  "idempotency-receipt-correlation",
 ];
 
 const LOG_RECIPE_FILES = {

@@ -1,0 +1,11 @@
+Idempotency <-> counterparty receipt correlation (fail-closed)
+Attempts: 5  Operations: 4  Receipts: 4
+
+op-A [idem-A] -> correlated (receipt rcpt-A acknowledged)
+op-B [idem-B] -> unknown (missing: no counterparty receipt)
+op-C [idem-C] -> unknown (mismatch: receipt operationId op-X != op-C)
+op-D [idem-D] -> unknown (duplicate: 2 receipts share this idempotencyKey)
+
+Summary: 1 correlated, 3 unknown (fail-closed)
+Identifiers stay independent; no exactly-once or payment-verification claim.
+ok
